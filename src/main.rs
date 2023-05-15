@@ -1,4 +1,5 @@
 mod config;
+mod load_balancing;
 
 use log::Level;
 
