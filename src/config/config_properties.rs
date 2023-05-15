@@ -8,7 +8,7 @@ pub(crate) struct ConfigProperties {
     pub(crate) address: String,
     #[serde(default = "default_strategy")]
     pub(crate) strategy: StrategyOption,
-    pub(crate) backends: Vec<String>,
+    pub(crate) receiver_addresses: Vec<String>,
 }
 
 fn default_address() -> String {
