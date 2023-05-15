@@ -1,6 +1,6 @@
 {
   "strategy": "IpHash",
-  "backends": [
+  "receiver_addresses": [
     "127.0.0.1:81",
     "127.0.0.1:82",
     "127.0.0.1:83",

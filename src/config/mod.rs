@@ -3,7 +3,7 @@ use std::io::BufReader;
 
 use crate::config::config_properties::ConfigProperties;
 
-mod config_properties;
+pub(crate) mod config_properties;
 
 pub(crate) fn configure(config_file_path: &str) -> Result<ConfigProperties, serde_json::Error> {
     let file = File::open(config_file_path).unwrap();
@@ -14,7 +14,7 @@ pub(crate) fn configure(config_file_path: &str) -> Result<ConfigProperties, serd
 mod tests {
     use crate::config::config_properties::ConfigProperties;
     use crate::config::configure;
-    use crate::load_balancing::StrategyOption;
+    use crate::load_balancing::strategy::StrategyOption;
 
     #[test]
     fn should_load_props_if_all_present() {
@@ -22,7 +22,7 @@ mod tests {
         let expected_props = ConfigProperties {
             address: String::from("127.0.0.1:80"),
             strategy: StrategyOption::RoundRobin,
-            backends: vec![
+            receiver_addresses: vec![
                 String::from("127.0.0.1:81"),
                 String::from("127.0.0.1:82"),
                 String::from("127.0.0.1:83"),
@@ -39,7 +39,7 @@ mod tests {
         let expected_props = ConfigProperties {
             address: String::from("localhost:8080"),
             strategy: StrategyOption::IpHash,
-            backends: vec![
+            receiver_addresses: vec![
                 String::from("127.0.0.1:81"),
                 String::from("127.0.0.1:82"),
                 String::from("127.0.0.1:83"),
@@ -56,7 +56,7 @@ mod tests {
         let expected_props = ConfigProperties {
             address: String::from("127.0.0.1:80"),
             strategy: StrategyOption::Random,
-            backends: vec![
+            receiver_addresses: vec![
                 String::from("127.0.0.1:81"),
                 String::from("127.0.0.1:82"),
                 String::from("127.0.0.1:83"),
