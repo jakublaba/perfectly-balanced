@@ -33,4 +33,13 @@ impl LoadBalancer {
             },
         }
     }
+
+    pub(crate) fn handle_request(&self, requester_ip: String) {
+        let ctx = RequestContext {
+            requester_ip,
+            receiver_ips: &self.receiver_addresses,
+        };
+        let receiver_ip = self.strategy.choose_receiver_ip(&ctx);
+        todo!()
+    }
 }

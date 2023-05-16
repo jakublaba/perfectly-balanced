@@ -4,9 +4,7 @@ use std::collections::hash_map::DefaultHasher;
 use std::hash::{Hash, Hasher};
 use async_trait::async_trait;
 
-pub(crate) struct IpHashStrategy {
-    pub(crate) receiver_addresses: Vec<String>,
-}
+pub(crate) struct IpHashStrategy;
 
 impl IpHashStrategy {
     pub fn new() -> Self {
