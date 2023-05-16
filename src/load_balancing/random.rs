@@ -1,5 +1,7 @@
 use rand::Rng;
 
+use async_trait::async_trait;
+
 use crate::load_balancing::strategy::Strategy;
 
 pub(crate) struct RandomStrategy {
@@ -12,6 +14,7 @@ impl RandomStrategy {
     }
 }
 
+#[async_trait]
 impl Strategy for RandomStrategy {
     fn choose_receiver_ip(&self) -> String {
         let idx = rand::thread_rng().gen_range(0..self.receiver_addresses.len());
