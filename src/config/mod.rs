@@ -14,7 +14,7 @@ pub(crate) fn configure(config_file_path: &str) -> Result<ConfigProperties, serd
 mod tests {
     use crate::config::config_properties::ConfigProperties;
     use crate::config::configure;
-    use crate::load_balancing::StrategyOption;
+    use crate::load_balancing::strategy::StrategyOption;
 
     #[test]
     fn should_load_props_if_all_present() {
