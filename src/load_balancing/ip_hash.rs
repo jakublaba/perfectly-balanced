@@ -1,8 +1,6 @@
 use crate::load_balancing::strategy::Strategy;
 
-pub(crate) struct IpHashStrategy {
-    pub(crate) receiver_addresses: Vec<String>,
-}
+pub(crate) struct IpHashStrategy;
 
 impl IpHashStrategy {
     pub fn new(receiver_addresses: Vec<String>) -> Self {

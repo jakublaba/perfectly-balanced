@@ -11,7 +11,7 @@ pub(crate) fn configure(config_file_path: &str) -> Result<ConfigProperties, serd
 }
 
 #[cfg(test)]
-mod tests {
+mod test {
     use crate::config::config_properties::ConfigProperties;
     use crate::config::configure;
     use crate::load_balancing::strategy::StrategyOption;
