@@ -1,0 +1,10 @@
+[
+  {
+    "httpRequest": {
+      "path": "/"
+    },
+    "httpResponse": {
+      "body": "A response from mockserver"
+    }
+  }
+]
