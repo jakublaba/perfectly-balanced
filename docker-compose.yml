@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  mockserver_1:
+    container_name: mockserver_1
+    image: mockserver/mockserver
+  mockserver_2:
+    container_name: mockserver_2
+    image: mockserver/mockserver
+  mockserver_3:
+    container_name: mockserver_3
+    image: mockserver/mockserver
+  mockserver_4:
+    container_name: mockserver_4
+    image: mockserver/mockserver
+  mockserver_5:
+    container_name: mockserver_5
+    image: mockserver/mockserver
+
