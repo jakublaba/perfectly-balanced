@@ -1,39 +1,15 @@
 version: "3"
 
+x-mockserver_template: &mockserver_template
+  image: mockserver/mockserver
+  environment:
+    - MOCKSERVER_INITIALIZATION_JSON_PATH=/config/expectations.json
+  volumes:
+    - "./mockserver:/config"
+
 services:
-  mockserver_1:
-    container_name: mockserver_1
-    image: mockserver/mockserver
+  mockserver:
+    <<: *mockserver_template
     ports:
-      - "1081:1080"
-    volumes:
-      - "./mockserver:/config" 
-  mockserver_2:
-    container_name: mockserver_2
-    image: mockserver/mockserver
-    ports:
-      - "1082:1080"
-    volumes:
-        - "./mockserver:/config" 
-  mockserver_3:
-    container_name: mockserver_3
-    image: mockserver/mockserver
-    ports:
-      - "1083:1080"
-    volumes:
-      - "./mockserver:/config"  
-  mockserver_4:
-    container_name: mockserver_4
-    image: mockserver/mockserver
-    ports:
-      - "1084:1080"
-    volumes:
-      - "./mockserver:/config" 
-  mockserver_5:
-    container_name: mockserver_5
-    image: mockserver/mockserver
-    ports:
-      - "1085:1080"
-    volumes:
-      - "./mockserver:/config" 
+      - "1081-1180:1080"
 
