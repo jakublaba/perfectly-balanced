@@ -1,0 +1,15 @@
+version: "3"
+
+x-mockserver_template: &mockserver_template
+  image: mockserver/mockserver
+  environment:
+    - MOCKSERVER_INITIALIZATION_JSON_PATH=/config/expectations.json
+  volumes:
+    - "./mockserver:/config"
+
+services:
+  mockserver:
+    <<: *mockserver_template
+    ports:
+      - "1081-1180:1080"
+
