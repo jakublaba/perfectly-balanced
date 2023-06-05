@@ -1,0 +1,11 @@
+{
+  "address": "localhost:8080",
+  "strategy": "IpHash",
+  "receiver_addresses": [
+    "localhost:1081",
+    "localhost:1082",
+    "localhost:1083",
+    "localhost:1084",
+    "localhost:1085"
+  ]
+}

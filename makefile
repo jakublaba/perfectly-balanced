@@ -1,4 +1,4 @@
-CLONES=10
+CLONES=5
 
 start:
 	docker compose up --scale mockserver=$(CLONES) -d

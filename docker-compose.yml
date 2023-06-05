@@ -11,5 +11,5 @@ services:
   mockserver:
     <<: *mockserver_template
     ports:
-      - "1081-1180:1080"
+      - "1081-1085:1080"
 

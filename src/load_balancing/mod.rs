@@ -38,9 +38,13 @@ impl LoadBalancer {
             receiver_ips: &self.receiver_addresses,
         };
 
-        log::info!("Packet will be forwarded from {}", ctx.requester_ip.clone());
+        //log::info!("Packet will be forwarded from {}", ctx.requester_ip.clone());
         let receiver_ip = self.strategy.choose_receiver_ip(&ctx);
-        log::info!("Packets fill be forwarded to {}", receiver_ip.clone());
+        log::info!(
+            "Packet forwarded: {} -> {}",
+            ctx.requester_ip.clone(),
+            receiver_ip.clone()
+        );
         return receiver_ip;
     }
 }
