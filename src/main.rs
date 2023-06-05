@@ -21,17 +21,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         let mut egress = TcpStream::connect(load_balancer.get_receiver_ip(addr.to_string())).await?;
 
-        match tokio::io::copy_bidirectional(&mut ingress, &mut egress).await {
-
-            Ok((to_egress, to_ingress)) => {
-                log::info!(
-                        "Connection ended gracefully ({to_egress} bytes from client, {to_ingress} bytes from server)"
-                    );
-            }
-            Err(err) => {
-                log::info!("Error while proxying: {}", err);
-            }
-        }
+        tokio::io::copy_bidirectional(&mut ingress, &mut egress).await.unwrap();
     }
     Ok(())
 }
