@@ -1,7 +1,7 @@
 use std::sync::{Arc, Mutex};
 
-use crate::load_balancing::RequestContext;
 use crate::load_balancing::strategy::Strategy;
+use crate::load_balancing::RequestContext;
 
 pub(crate) struct RoundRobinStrategy {
     counter: Arc<Mutex<u32>>,

@@ -1,8 +1,8 @@
 use crate::load_balancing::strategy::Strategy;
 use crate::load_balancing::RequestContext;
+use async_trait::async_trait;
 use std::collections::hash_map::DefaultHasher;
 use std::hash::{Hash, Hasher};
-use async_trait::async_trait;
 
 pub(crate) struct IpHashStrategy;
 
@@ -11,14 +11,14 @@ impl IpHashStrategy {
         IpHashStrategy {}
     }
 
-     fn calculate_hash<T: Hash>(&self, t: &T) -> u64 {
+    fn calculate_hash<T: Hash>(&self, t: &T) -> u64 {
         let mut hasher = DefaultHasher::new();
         t.hash(&mut hasher);
         hasher.finish()
     }
 
-     fn hash_to_idx(&self, hash: u64, receiver_vector_len: usize) -> usize {
-         hash as usize % receiver_vector_len
+    fn hash_to_idx(&self, hash: u64, receiver_vector_len: usize) -> usize {
+        hash as usize % receiver_vector_len
     }
 }
 
@@ -26,40 +26,39 @@ impl IpHashStrategy {
 impl Strategy for IpHashStrategy {
     fn choose_receiver_ip<'l>(&self, ctx: &'l RequestContext) -> String {
         let requester_hash = self.calculate_hash(&ctx.requester_ip);
-        let idx = self.hash_to_idx(requester_hash,ctx.receiver_ips.len());
+        let idx = self.hash_to_idx(requester_hash, ctx.receiver_ips.len());
         ctx.receiver_ips[idx].clone()
     }
-
 }
 
 #[cfg(test)]
 mod test {
     use crate::load_balancing::ip_hash::IpHashStrategy;
-    use crate::load_balancing::RequestContext;
     use crate::load_balancing::strategy::Strategy;
+    use crate::load_balancing::RequestContext;
 
     #[test]
     fn should_generate_different_hashes() {
         let ip_hash_strategy = IpHashStrategy::new();
         let receiver_addresses = &vec![
-           String::from("127.0.0.1:81"),
-           String::from("127.0.0.1:82"),
-           String::from("127.0.0.1:83")
+            String::from("127.0.0.1:81"),
+            String::from("127.0.0.1:82"),
+            String::from("127.0.0.1:83"),
         ];
         let mut hash_vector = Vec::new();
 
         for i in receiver_addresses {
             hash_vector.push(ip_hash_strategy.calculate_hash(i));
         }
-        assert_ne!(hash_vector[0],hash_vector[1]);
-        assert_ne!(hash_vector[0],hash_vector[2]);
-        assert_ne!(hash_vector[1],hash_vector[2]);
+        assert_ne!(hash_vector[0], hash_vector[1]);
+        assert_ne!(hash_vector[0], hash_vector[2]);
+        assert_ne!(hash_vector[1], hash_vector[2]);
     }
     #[test]
     fn should_map_to_index_within_bounds() {
         let ip_hash_strategy = IpHashStrategy::new();
         let requester_hash = ip_hash_strategy.calculate_hash(&String::from("127.0.0.1:82"));
-        let idx = ip_hash_strategy.hash_to_idx(requester_hash,5);
+        let idx = ip_hash_strategy.hash_to_idx(requester_hash, 5);
 
         assert!(requester_hash > 5);
         assert!(idx < 5);
