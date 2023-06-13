@@ -6,7 +6,7 @@ use crate::load_balancing::LoadBalancer;
 use log::Level;
 use tokio::net::{TcpListener, TcpStream};
 
-#[tokio::main(flavor = "multi_thread", worker_threads = 5)]
+#[tokio::main(flavor = "multi_thread", worker_threads = 12)]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     simple_logger::init_with_level(Level::Debug)?;
     let global_configuration = configure("presentation.json")?;
