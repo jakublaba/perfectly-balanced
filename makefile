@@ -5,3 +5,4 @@ start:
 stop:
 	docker compose down
 .PHONY: start stop
+

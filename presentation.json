@@ -1,0 +1,15 @@
+{
+  "strategy": "Random",
+  "receiver_addresses": [
+    "localhost:1081",
+    "localhost:1082",
+    "localhost:1083",
+    "localhost:1084",
+	"localhost:1085",
+	"localhost:1086",
+	"localhost:1087",
+	"localhost:1088",
+	"localhost:1089",
+    "localhost:1090"
+  ]
+}
